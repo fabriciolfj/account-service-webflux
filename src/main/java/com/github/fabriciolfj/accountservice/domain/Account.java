@@ -4,6 +4,7 @@ import com.github.fabriciolfj.accountservice.domain.exceptions.ExtractNotFoundEx
 import lombok.*;
 
 import java.math.BigDecimal;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
@@ -19,12 +20,14 @@ public class Account {
     private String code;
     @EqualsAndHashCode.Include
     private String cpf;
+    private LocalDate birthday;
+    private BigDecimal rate;
     private BigDecimal balanceInit;
     private List<Extract> extracts;
-    private String product;
+    private Integer score;
 
-    public Account addProduct(final String code) {
-        product = code;
+    public Account addRate(final BigDecimal rate) {
+        this.rate = rate;
         return this;
     }
 
