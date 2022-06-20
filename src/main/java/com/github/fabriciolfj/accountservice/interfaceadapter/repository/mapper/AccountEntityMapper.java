@@ -17,8 +17,10 @@ public class AccountEntityMapper {
     public static Account toDomain(final AccountEntity entity, final Extract extract) {
         return Account.builder()
                 .balanceInit(extract.getBalance())
-                .product(entity.getProduct())
+                .rate(entity.getRate())
                 .cpf(entity.getCpf())
+                .birthday(entity.getDateBirthday())
+                .score(entity.getScore())
                 .extracts(List.of(extract))
                 .build();
     }
@@ -26,8 +28,10 @@ public class AccountEntityMapper {
     public static Account toDomain(final AccountEntity entity) {
         return Account.builder()
                 .balanceInit(BigDecimal.ZERO)
-                .product(entity.getProduct())
+                .rate(entity.getRate())
                 .cpf(entity.getCpf())
+                .birthday(entity.getDateBirthday())
+                .score(entity.getScore())
                 .extracts(Collections.emptyList())
                 .build();
     }
@@ -35,8 +39,10 @@ public class AccountEntityMapper {
     public static final AccountEntity toEntity(final Account account) {
         return AccountEntity.builder()
                 .code(account.getCode())
+                .score(account.getScore())
+                .dateBirthday(account.getBirthday())
                 .cpf(account.getCpf())
-                .product(account.getProduct())
+                .rate(account.getRate())
                 .build();
     }
 }

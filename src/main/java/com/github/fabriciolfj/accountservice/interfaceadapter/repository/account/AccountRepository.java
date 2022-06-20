@@ -13,5 +13,5 @@ public interface AccountRepository extends ReactiveSortingRepository<AccountEnti
 
     Mono<AccountEntity> findByCpf(final String cpf);
 
-    Flux<AccountEntity> findAll(Pageable pageable);
+    Flux<AccountEntity> findAllBy(Pageable pageable);
 }

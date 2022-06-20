@@ -51,7 +51,7 @@ public class AccountGateway implements SaveAccount, FindAccount, ListAllAccounts
     @Override
     @Transactional(propagation = Propagation.NEVER, readOnly = true)
     public Mono<Page<Account>> findAll(final PageRequest request) {
-        return accountRepository.findAll(request)
+        return accountRepository.findAllBy(request)
                 .map(AccountEntityMapper::toDomain)
                 .collectList()
                 .zipWhen(ac -> accountRepository.count())

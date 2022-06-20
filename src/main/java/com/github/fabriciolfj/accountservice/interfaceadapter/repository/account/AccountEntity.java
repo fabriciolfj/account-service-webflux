@@ -5,6 +5,7 @@ import org.springframework.data.annotation.Id;
 import org.springframework.data.relational.core.mapping.Column;
 import org.springframework.data.relational.core.mapping.Table;
 
+import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 
@@ -20,7 +21,8 @@ public class AccountEntity {
     private Long id;
     private String code;
     private String cpf;
-    private String product;
+    private BigDecimal rate;
+    private Integer score;
     @Column("date_birthday")
     private LocalDate dateBirthday;
 }
