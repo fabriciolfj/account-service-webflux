@@ -2,7 +2,9 @@ create table conta (
 id BIGSERIAL PRIMARY KEY NOT NULL,
 code varchar(100) not null,
 cpf varchar(11) not null,
-product varchar(100) not null,
+rate numeric(15,4) not null,
+score int not null,
+date_birthday date not null,
 unique(cpf)
 );
 
