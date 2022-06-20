@@ -3,7 +3,7 @@ package com.github.fabriciolfj.accountservice.business;
 import com.github.fabriciolfj.accountservice.domain.Account;
 import reactor.core.publisher.Mono;
 
-public interface LinkProduct {
+public interface GetRate {
 
-    Mono<Account> linkProduct(final Account account);
+    Mono<Account> find(final Account account);
 }
