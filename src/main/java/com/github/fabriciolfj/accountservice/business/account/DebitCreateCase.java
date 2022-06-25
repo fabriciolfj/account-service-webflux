@@ -22,7 +22,6 @@ public class DebitCreateCase {
                         findExtract.findLast(ex.getCodeConta())
                             .map(result -> ex.calculate(result)))
                 .flatMap(saveExtract::save)
-                .doOnNext(r -> log.info("Extract save: {}", r))
                 .flatMap(result -> Mono.just(extract));
     }
 }

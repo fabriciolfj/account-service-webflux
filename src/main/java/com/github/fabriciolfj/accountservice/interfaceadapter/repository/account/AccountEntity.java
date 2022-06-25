@@ -23,6 +23,7 @@ public class AccountEntity {
     private String cpf;
     private BigDecimal rate;
     private Integer score;
+    private Integer withdraw;
     @Column("date_birthday")
     private LocalDate dateBirthday;
 }

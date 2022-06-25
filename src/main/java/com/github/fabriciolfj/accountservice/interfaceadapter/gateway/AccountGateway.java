@@ -3,6 +3,7 @@ package com.github.fabriciolfj.accountservice.interfaceadapter.gateway;
 import com.github.fabriciolfj.accountservice.business.FindAccount;
 import com.github.fabriciolfj.accountservice.business.ListAllAccounts;
 import com.github.fabriciolfj.accountservice.business.SaveAccount;
+import com.github.fabriciolfj.accountservice.business.UpdateAccount;
 import com.github.fabriciolfj.accountservice.domain.Account;
 import com.github.fabriciolfj.accountservice.domain.exceptions.AccountNotFoundException;
 import com.github.fabriciolfj.accountservice.interfaceadapter.repository.account.AccountRepository;
@@ -21,7 +22,7 @@ import reactor.core.publisher.Mono;
 @Slf4j
 @Component
 @RequiredArgsConstructor
-public class AccountGateway implements SaveAccount, FindAccount, ListAllAccounts {
+public class AccountGateway implements SaveAccount, FindAccount, ListAllAccounts, UpdateAccount {
 
     private final AccountRepository accountRepository;
     private final ExtractGateway extractGateway;
@@ -63,5 +64,18 @@ public class AccountGateway implements SaveAccount, FindAccount, ListAllAccounts
                 .collectList()
                 .zipWhen(ac -> accountRepository.count())
                 .map(t -> new PageImpl<>(t.getT1(), request, t.getT2()));
+    }
+
+    @Override
+    @Transactional(propagation = Propagation.REQUIRED)
+    public Mono<Account> execute(final Account account) {
+        return Mono.just(account)
+                .flatMap(e -> accountRepository.findByCode(e.getCode()))
+                .switchIfEmpty(Mono.defer(() -> Mono.error(new AccountNotFoundException("Account not found to code " + account.getCode()))))
+                .doOnNext(result -> log.info("Found account: {}", result.getId()))
+                .map(entity -> AccountEntityMapper.toMerge(account, entity))
+                .doOnNext(result -> log.info("Update account: {}", result))
+                .flatMap(accountRepository::save)
+                .thenReturn(account);
     }
 }

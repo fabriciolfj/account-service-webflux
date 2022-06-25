@@ -19,7 +19,6 @@ public class OperationDebitCase {
                 .flatMap(debitCreateCase::execute)
                 .doOnNext(c -> log.info("Extract saved : {}", c))
                 .flatMap(c -> debitRateCreateCase.execute(extract.getCodeConta(), extract.getDebit()))
-                .flatMap(debitCreateCase::execute)
-                .doOnNext(c ->  log.info("Extract rate saved: {}", c));
+                .flatMap(debitCreateCase::execute);
     }
 }

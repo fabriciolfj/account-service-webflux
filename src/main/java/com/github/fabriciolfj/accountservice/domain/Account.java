@@ -7,6 +7,7 @@ import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 import java.util.UUID;
 
 @Builder
@@ -25,6 +26,29 @@ public class Account {
     private BigDecimal balanceInit;
     private List<Extract> extracts;
     private Integer score;
+    private Integer withdraw;
+
+    public Account decrementWithdraw() {
+        if (Objects.isNull(withdraw) || withdraw <= 0) {
+            return this;
+        }
+
+        withdraw--;
+        return this;
+    }
+
+    public boolean isNotWithdrawFree() {
+        if (Objects.isNull(withdraw)) {
+            return true;
+        }
+
+        if (withdraw <= 0) {
+            return true;
+        };
+
+        withdraw--;
+        return false;
+    }
 
     public Account addRate(final BigDecimal rate) {
         this.rate = rate;
