@@ -8,6 +8,8 @@ import com.github.fabriciolfj.accountservice.interfaceadapter.repository.extract
 import com.github.fabriciolfj.accountservice.interfaceadapter.repository.mapper.ExtractEntityMapper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
@@ -35,9 +37,10 @@ public class ExtractGateway  implements FindExtract, SaveExtract {
     }
 
     @Override
-    public Mono<Void> save(final Mono<Extract> extract) {
-        return extract
+    @Transactional(propagation = Propagation.REQUIRED)
+    public Mono<Extract> save(final Extract extract) {
+        return Mono.just(extract)
                 .flatMap(e -> extractRepository.save(ExtractEntityMapper.toEntity(e)))
-                .then();
+                .thenReturn(extract);
     }
 }

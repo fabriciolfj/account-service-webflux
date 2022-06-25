@@ -1,14 +1,15 @@
 package com.github.fabriciolfj.accountservice.infrastructure.controller;
 
 import com.github.fabriciolfj.accountservice.business.account.AccountCreateCase;
+import com.github.fabriciolfj.accountservice.business.account.OperationDebitCase;
 import com.github.fabriciolfj.accountservice.infrastructure.converter.AccountDtoConverter;
+import com.github.fabriciolfj.accountservice.infrastructure.converter.ExtractDtoConverter;
 import com.github.fabriciolfj.accountservice.infrastructure.dto.request.AccountRequest;
+import com.github.fabriciolfj.accountservice.infrastructure.dto.request.ExtractRequest;
 import com.github.fabriciolfj.accountservice.infrastructure.dto.response.AccountResponse;
 import lombok.RequiredArgsConstructor;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.HttpStatus;
+import org.springframework.web.bind.annotation.*;
 import reactor.core.publisher.Mono;
 
 import javax.validation.Valid;
@@ -19,6 +20,7 @@ import javax.validation.Valid;
 public class AccountController {
 
     private final AccountCreateCase createCase;
+    private final OperationDebitCase operationDebitCase;
 
     @PostMapping
     public Mono<AccountResponse> create(@Valid @RequestBody final AccountRequest request) {
@@ -26,5 +28,14 @@ public class AccountController {
                 .map(AccountDtoConverter::toDomain)
                 .flatMap(createCase::execute)
                 .map(AccountDtoConverter::toResponse);
+    }
+
+    @PutMapping("/debits")
+    @ResponseStatus(HttpStatus.CREATED)
+    public Mono<Void> createDebit(@Valid @RequestBody final ExtractRequest request) {
+        return Mono.just(request)
+                .map(ExtractDtoConverter::toDomainDebit)
+                .flatMap(operationDebitCase::execute)
+                .then();
     }
 }

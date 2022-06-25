@@ -56,16 +56,15 @@ public class Extract {
     public Extract calculate(final Extract last) {
         var value = BigDecimal.ZERO;
         switch (debit.compareTo(BigDecimal.ZERO)) {
-            case EQUALS:
+            case EQUALS -> {
                 value = last.balance.add(credit);
                 balance = value;
-                break;
-            case DIF:
+            }
+            case DIF -> {
                 value = last.balance.subtract(debit);
                 balance = value;
-                break;
-            default:
-                throw new DomainException("Operation calculate extract fail");
+            }
+            default -> throw new DomainException("Operation calculate extract fail");
         }
 
         return this;

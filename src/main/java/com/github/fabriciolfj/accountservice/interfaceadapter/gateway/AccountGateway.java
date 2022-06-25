@@ -49,6 +49,13 @@ public class AccountGateway implements SaveAccount, FindAccount, ListAllAccounts
     }
 
     @Override
+    public Mono<Account> findByCode(final String code) {
+        return accountRepository.findByCode(code)
+                .map(AccountEntityMapper::toDomain)
+                .switchIfEmpty(Mono.defer(() -> Mono.error(new AccountNotFoundException("Account not found to code " + code))));
+    }
+
+    @Override
     @Transactional(propagation = Propagation.NEVER, readOnly = true)
     public Mono<Page<Account>> findAll(final PageRequest request) {
         return accountRepository.findAllBy(request)

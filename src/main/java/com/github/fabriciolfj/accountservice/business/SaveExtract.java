@@ -5,5 +5,5 @@ import reactor.core.publisher.Mono;
 
 public interface SaveExtract {
 
-    Mono<Void> save(final Mono<Extract> extract);
+    Mono<Extract> save(final Extract extract);
 }
