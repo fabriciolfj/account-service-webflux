@@ -27,6 +27,7 @@ public class Account {
     private List<Extract> extracts;
     private Integer score;
     private Integer withdraw;
+    private LocalDate dateRegistration;
 
     public Account decrementWithdraw() {
         if (Objects.isNull(withdraw) || withdraw <= 0) {
@@ -38,15 +39,7 @@ public class Account {
     }
 
     public boolean isNotWithdrawFree() {
-        if (Objects.isNull(withdraw)) {
-            return true;
-        }
-
-        if (withdraw <= 0) {
-            return true;
-        };
-
-        return false;
+        return Objects.isNull(withdraw) && withdraw <= 0;
     }
 
     public Account addRate(final BigDecimal rate) {

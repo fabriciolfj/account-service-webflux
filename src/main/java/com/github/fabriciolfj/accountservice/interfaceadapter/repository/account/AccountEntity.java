@@ -26,4 +26,6 @@ public class AccountEntity {
     private Integer withdraw;
     @Column("date_birthday")
     private LocalDate dateBirthday;
+    @Column("date_registration")
+    private LocalDate dateRegistration;
 }
