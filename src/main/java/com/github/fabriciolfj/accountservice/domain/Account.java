@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 import java.util.UUID;
+import java.util.concurrent.TimeUnit;
 
 @Builder
 @AllArgsConstructor
@@ -28,6 +29,10 @@ public class Account {
     private Integer score;
     private Integer withdraw;
     private LocalDate dateRegistration;
+
+    public boolean isResetRule() {
+        return dateRegistration.plusDays(29).isBefore(LocalDate.now());
+    }
 
     public Account decrementWithdraw() {
         if (Objects.isNull(withdraw) || withdraw <= 0) {

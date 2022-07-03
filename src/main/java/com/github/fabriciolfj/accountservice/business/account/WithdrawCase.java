@@ -17,11 +17,15 @@ public class WithdrawCase {
     private final FindAccount findAccount;
     private final UpdateAccount updateAccount;
 
+    private final ResetRuleWithdrawCase resetRuleWithdrawCase;
+
     public Mono<Account> execute(final String account) {
         return findAccount.findByCode(account)
                 .map(c -> c.decrementWithdraw())
                 .doOnNext(c -> log.info("Withdraw decremented: {}, to account: {}", c.getWithdraw(), c.getCode()))
-                .flatMap(c -> updateAccount.execute(c));
+                .flatMap(c -> updateAccount.execute(c))
+                .filter(c -> c.isResetRule())
+                .flatMap(c -> resetRuleWithdrawCase.execute(c));
     }
 
 }

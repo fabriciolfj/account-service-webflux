@@ -10,6 +10,16 @@ server:
       min-spare: 20
 
 spring:
+  kafka:
+    bootstrap-servers:
+      - localhost:9092
+  cloud:
+    stream:
+      function:
+        definition: reset-withdraw
+      bindings:
+        reset-withdraw-out-0:
+          destination: reset-withdraw
   flyway:
     user: ${spring.r2dbc.username}
     password: ${spring.r2dbc.password}
