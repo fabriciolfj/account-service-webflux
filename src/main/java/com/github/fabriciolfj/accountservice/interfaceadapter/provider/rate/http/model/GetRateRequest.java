@@ -1,4 +1,4 @@
-package com.github.fabriciolfj.accountservice.interfaceadapter.provider.rate.model;
+package com.github.fabriciolfj.accountservice.interfaceadapter.provider.rate.http.model;
 
 import lombok.*;
 

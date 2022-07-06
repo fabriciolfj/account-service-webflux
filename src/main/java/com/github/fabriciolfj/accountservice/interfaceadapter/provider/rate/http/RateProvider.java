@@ -1,19 +1,17 @@
-package com.github.fabriciolfj.accountservice.interfaceadapter.provider.rate;
+package com.github.fabriciolfj.accountservice.interfaceadapter.provider.rate.http;
 
 import com.github.fabriciolfj.accountservice.domain.exceptions.ProductClientException;
-import com.github.fabriciolfj.accountservice.interfaceadapter.provider.rate.model.GetRateRequest;
-import com.github.fabriciolfj.accountservice.interfaceadapter.provider.rate.model.GetRateResponse;
+import com.github.fabriciolfj.accountservice.interfaceadapter.provider.rate.http.model.GetRateRequest;
+import com.github.fabriciolfj.accountservice.interfaceadapter.provider.rate.http.model.GetRateResponse;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
-import org.springframework.web.reactive.function.BodyInserter;
 import org.springframework.web.reactive.function.BodyInserters;
 import org.springframework.web.reactive.function.client.WebClient;
 import reactor.core.publisher.Mono;
 import reactor.util.retry.Retry;
 
-import java.math.BigDecimal;
 import java.net.URI;
 import java.time.Duration;
 

@@ -1,7 +1,7 @@
-package com.github.fabriciolfj.accountservice.interfaceadapter.provider.rate;
+package com.github.fabriciolfj.accountservice.interfaceadapter.provider.rate.http;
 
 import com.github.fabriciolfj.accountservice.domain.Account;
-import com.github.fabriciolfj.accountservice.interfaceadapter.provider.rate.model.GetRateRequest;
+import com.github.fabriciolfj.accountservice.interfaceadapter.provider.rate.http.model.GetRateRequest;
 
 public class RateProviderConverter {
 

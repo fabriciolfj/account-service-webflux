@@ -18,7 +18,10 @@ spring:
       function:
         definition: reset-withdraw
       bindings:
-        reset-withdraw-out-0:
+        updateWithdraw-in-0:
+          destination: update-withdraw
+          group: ${spring.application.name}
+        resetWithdraw-out-0:
           destination: reset-withdraw
   flyway:
     user: ${spring.r2dbc.username}
