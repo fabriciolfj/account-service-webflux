@@ -2,13 +2,12 @@ package com.github.fabriciolfj.accountservice.interfaceadapter.provider.rate.lis
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.github.fabriciolfj.accountservice.business.account.UpdateResetRuleCase;
-import com.github.fabriciolfj.accountservice.domain.ResetRuleAccount;
 import com.github.fabriciolfj.accountservice.interfaceadapter.provider.rate.listener.model.ReceiveRateResponse;
+import com.github.fabriciolfj.accountservice.interfaceadapter.provider.rate.listener.model.ResetRuleAccountConverter;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Component;
-import reactor.core.scheduler.Schedulers;
 
 import java.util.function.Consumer;
 
@@ -25,11 +24,7 @@ public class UpdateWithdrawListener {
         return value -> {
             log.info("Msg received reset rule rate: {}", value);
             var receive = toDto(value);
-            updateResetRuleCase.execute(ResetRuleAccount.builder()
-                            .withdraw(receive.getWithdraw())
-                            .account(receive.getAccount())
-                            .rate(receive.getRate())
-                    .build())
+            updateResetRuleCase.execute(ResetRuleAccountConverter.toDomain(receive))
                     .subscribe();
         };
     }
