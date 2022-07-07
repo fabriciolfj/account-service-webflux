@@ -15,4 +15,5 @@ public class ExtractRequest {
     @JsonProperty("code_conta")
     private String codeConta;
     private BigDecimal value;
+    private String transaction;
 }

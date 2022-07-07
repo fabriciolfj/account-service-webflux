@@ -12,5 +12,6 @@ import java.math.BigDecimal;
 public class ReceiveRateResponse {
 
     private BigDecimal rate;
+    private int withdraw;
     private String account;
 }

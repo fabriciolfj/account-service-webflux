@@ -8,5 +8,7 @@ public interface ExtractRepository extends ReactiveCrudRepository<ExtractEntity,
 
     Mono<ExtractEntity> findFirstByContaOrderByDateExtratoDesc(final String conta);
 
+    Mono<ExtractEntity> findFirstByContaOrderByDateExtratoAsc(final String conta);
+
     Flux<ExtractEntity> findByConta(final String account);
 }

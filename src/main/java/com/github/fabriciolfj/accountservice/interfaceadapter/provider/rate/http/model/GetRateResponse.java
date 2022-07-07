@@ -12,4 +12,5 @@ import java.math.BigDecimal;
 public class GetRateResponse {
 
     private BigDecimal rate;
+    private Integer withdraw;
 }

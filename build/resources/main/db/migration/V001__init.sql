@@ -5,6 +5,7 @@ cpf varchar(11) not null,
 rate numeric(15,4) not null,
 score int not null,
 date_birthday date not null,
+date_registration date not null,
 withdraw int,
 unique(cpf)
 );

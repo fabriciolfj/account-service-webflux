@@ -13,16 +13,20 @@ spring:
   kafka:
     bootstrap-servers:
       - localhost:9092
+    consumer:
+      auto-offset-reset: earliest
+    listener:
+      missing-topics-fatal: false
   cloud:
     stream:
-      function:
-        definition: reset-withdraw
       bindings:
         updateWithdraw-in-0:
-          destination: update-withdraw
-          group: ${spring.application.name}
+          destination: update-withdraw-group
+          content-type: application/json
+          group: '${spring.application.name}'
         resetWithdraw-out-0:
-          destination: reset-withdraw
+          content-type: application/json
+          destination: reset-withdraw-group
   flyway:
     user: ${spring.r2dbc.username}
     password: ${spring.r2dbc.password}
@@ -43,4 +47,5 @@ spring:
 app:
   product: http://localhost:9090
 
-
+topic:
+  reset-withdraw: resetWithdraw-out-0

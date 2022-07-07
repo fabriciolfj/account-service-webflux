@@ -16,6 +16,7 @@ public class AccountDtoConverter {
                 .score(request.getScore())
                 .birthday(LocalDate.parse(request.getBirthday()))
                 .cpf(request.getCpf())
+                .dateRegistration(LocalDate.now())
                 .build();
 
         account.setBalanceInit(request.getValue());

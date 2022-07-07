@@ -52,7 +52,8 @@ public class AccountGateway implements SaveAccount, FindAccount, ListAllAccounts
     @Override
     public Mono<Account> findByCode(final String code) {
         return accountRepository.findByCode(code)
-                .map(AccountEntityMapper::toDomain)
+                .zipWhen(ac -> extractGateway.findFirst(ac.getCode()))
+                .map(t -> AccountEntityMapper.toDomain(t.getT1(), t.getT2()))
                 .switchIfEmpty(Mono.defer(() -> Mono.error(new AccountNotFoundException("Account not found to code " + code))));
     }
 

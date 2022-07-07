@@ -31,7 +31,9 @@ public class Account {
     private LocalDate dateRegistration;
 
     public boolean isResetRule() {
-        return dateRegistration.plusDays(29).isBefore(LocalDate.now());
+        /*var newDate = dateRegistration.plusDays(29);
+        return newDate.isBefore(LocalDate.now());*/
+        return true;
     }
 
     public Account decrementWithdraw() {
@@ -44,7 +46,7 @@ public class Account {
     }
 
     public boolean isNotWithdrawFree() {
-        return Objects.isNull(withdraw) && withdraw <= 0;
+        return Objects.isNull(withdraw) || withdraw <= 0;
     }
 
     public Account addRate(final BigDecimal rate) {

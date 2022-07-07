@@ -17,6 +17,7 @@ public class ResetRuleWithdrawCase {
 
     public Mono<Account> execute(final Account account) {
         return Mono.just(account)
+                .doOnNext(s -> log.info("Send event reset: {}", account))
                 .map(c -> {
                     gateway.send(c);
                     return c;

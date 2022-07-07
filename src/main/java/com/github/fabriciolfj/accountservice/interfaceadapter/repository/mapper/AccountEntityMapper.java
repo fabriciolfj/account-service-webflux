@@ -22,7 +22,9 @@ public class AccountEntityMapper {
                 .cpf(entity.getCpf())
                 .birthday(entity.getDateBirthday())
                 .score(entity.getScore())
+                .dateRegistration(entity.getDateRegistration())
                 .extracts(List.of(extract))
+                .code(entity.getCode())
                 .build();
     }
 
@@ -36,6 +38,7 @@ public class AccountEntityMapper {
                 .extracts(Collections.emptyList())
                 .withdraw(entity.getWithdraw())
                 .code(entity.getCode())
+                .dateRegistration(entity.getDateRegistration())
                 .build();
     }
 
@@ -46,6 +49,7 @@ public class AccountEntityMapper {
                 .dateBirthday(account.getBirthday())
                 .cpf(account.getCpf())
                 .rate(account.getRate())
+                .dateRegistration(account.getDateRegistration())
                 .withdraw(Objects.isNull(account.getWithdraw()) ? 0 : account.getWithdraw())
                 .build();
     }

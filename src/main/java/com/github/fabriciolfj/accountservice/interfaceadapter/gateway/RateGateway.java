@@ -19,7 +19,11 @@ public class RateGateway implements GetRate {
     public Mono<Account> find(final Account account) {
         return rateProvider
                 .find(RateProviderConverter.toRequest(account))
-                .flatMap(prod -> Mono.just(account.addRate(prod.getRate())))
+                .flatMap(resp -> {
+                    account.setRate(resp.getRate());
+                    account.setWithdraw(resp.getWithdraw());
+                    return Mono.just(account.addRate(resp.getRate()));
+                })
                 .log();
     }
 }

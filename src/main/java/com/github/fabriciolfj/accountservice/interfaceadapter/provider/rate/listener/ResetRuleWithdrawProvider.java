@@ -13,7 +13,7 @@ public class ResetRuleWithdrawProvider {
     @Autowired
     private StreamBridge streamBridge;
 
-    @Value("${topic.reset-withdraw:reset-withdraw}")
+    @Value("${topic.reset-withdraw}")
     private String topic;
 
     public void send(final String value) {
