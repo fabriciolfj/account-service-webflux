@@ -1,4 +1,4 @@
-package com.github.fabriciolfj.accountservice.interfaceadapter.provider.rate.listener.model;
+package com.github.fabriciolfj.accountservice.interfaceadapter.provider.rate.message.model;
 
 import lombok.*;
 

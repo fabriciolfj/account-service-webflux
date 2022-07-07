@@ -1,9 +1,9 @@
-package com.github.fabriciolfj.accountservice.interfaceadapter.provider.rate.listener;
+package com.github.fabriciolfj.accountservice.interfaceadapter.provider.rate.message;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.github.fabriciolfj.accountservice.business.account.UpdateResetRuleCase;
-import com.github.fabriciolfj.accountservice.interfaceadapter.provider.rate.listener.model.ReceiveRateResponse;
-import com.github.fabriciolfj.accountservice.interfaceadapter.provider.rate.listener.model.ResetRuleAccountConverter;
+import com.github.fabriciolfj.accountservice.interfaceadapter.provider.rate.message.model.ReceiveRateResponse;
+import com.github.fabriciolfj.accountservice.interfaceadapter.provider.rate.message.converter.ResetRuleAccountConverter;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.annotation.Bean;

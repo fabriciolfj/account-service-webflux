@@ -1,4 +1,4 @@
-package com.github.fabriciolfj.accountservice.interfaceadapter.provider.rate.listener.model;
+package com.github.fabriciolfj.accountservice.interfaceadapter.provider.rate.message.converter;
 
 import com.github.fabriciolfj.accountservice.domain.Account;
 

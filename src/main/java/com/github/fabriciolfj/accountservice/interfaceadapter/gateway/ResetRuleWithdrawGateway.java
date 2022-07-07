@@ -2,8 +2,8 @@ package com.github.fabriciolfj.accountservice.interfaceadapter.gateway;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.github.fabriciolfj.accountservice.domain.Account;
-import com.github.fabriciolfj.accountservice.interfaceadapter.provider.rate.listener.ResetRuleWithdrawProvider;
-import com.github.fabriciolfj.accountservice.interfaceadapter.provider.rate.listener.model.MsgRateProviderConverter;
+import com.github.fabriciolfj.accountservice.interfaceadapter.provider.rate.message.ResetRuleWithdrawProvider;
+import com.github.fabriciolfj.accountservice.interfaceadapter.provider.rate.message.converter.MsgRateProviderConverter;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;

@@ -1,4 +1,4 @@
-package com.github.fabriciolfj.accountservice.interfaceadapter.provider.rate.listener;
+package com.github.fabriciolfj.accountservice.interfaceadapter.provider.rate.message;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
