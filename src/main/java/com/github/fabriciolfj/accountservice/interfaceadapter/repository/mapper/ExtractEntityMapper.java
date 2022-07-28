@@ -18,6 +18,7 @@ public class ExtractEntityMapper {
                 .credit(entity.getCredit())
                 .debit(entity.getDebit())
                 .describe(entity.getDescribe())
+                .transaction(entity.getTransaction())
                 .build();
     }
 
@@ -29,6 +30,7 @@ public class ExtractEntityMapper {
                 .dateExtrato(extract.getDate())
                 .debit(extract.getDebit())
                 .describe(extract.getDescribe())
+                .transaction(extract.getTransaction())
                 .build();
     }
 }

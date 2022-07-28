@@ -5,6 +5,7 @@ import lombok.*;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
+import java.util.UUID;
 
 @EqualsAndHashCode
 @NoArgsConstructor
@@ -25,6 +26,7 @@ public class Extract {
     private String describe;
     private LocalDateTime date;
 
+    private String transaction;
     public static Extract initial(final BigDecimal balance, final String code) {
         var extract = extractDefault(code);
         extract.setBalance(balance);
@@ -32,22 +34,25 @@ public class Extract {
         extract.setDebit(BigDecimal.ZERO);
         extract.setCodeConta(code);
         extract.setDescribe(CREDIT + " value:" + balance);
+        extract.setTransaction(UUID.randomUUID().toString());
         return extract;
     }
 
-    public static Extract newExtract(final BigDecimal value, final String code, final TypeOperation operation) {
+    public static Extract newExtract(final BigDecimal value, final String code, final String transaction, final TypeOperation operation) {
         var extract = extractDefault(code);
         switch (operation) {
-            case CREDIT:
+            case CREDIT -> {
                 extract.setCredit(value);
                 extract.setDebit(BigDecimal.ZERO);
                 extract.setDescribe(CREDIT + " value:" + value);
-                break;
-            case DEBIT:
+                extract.setTransaction(transaction);
+            }
+            case DEBIT -> {
                 extract.setDebit(value);
                 extract.setCredit(BigDecimal.ZERO);
                 extract.setDescribe(DEBIT + " value:" + value);
-                break;
+                extract.setTransaction(transaction);
+            }
         }
 
         return extract;

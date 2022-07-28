@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import reactor.core.publisher.Mono;
 
 import java.math.BigDecimal;
+import java.util.UUID;
 
 @Service
 @Slf4j
@@ -19,7 +20,7 @@ public class DebitRateCreateCase {
         return withdrawCase.execute(account)
                 .filter(result -> result.isNotWithdrawFree())
                 .map(c -> {
-                    var extract = Extract.newExtract(value.multiply(c.getRate().divide(BigDecimal.valueOf(100))), account, TypeOperation.DEBIT);
+                    var extract = Extract.newExtract(value.multiply(c.getRate().divide(BigDecimal.valueOf(100))), account, UUID.randomUUID().toString(), TypeOperation.DEBIT);
                     extract.setDescribe("Debit rate " + c.getRate());
                     return extract;
                 });

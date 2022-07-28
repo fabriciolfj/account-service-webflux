@@ -17,5 +17,6 @@ debit decimal(10,4) not null,
 credit decimal(10,4) not null,
 balance decimal(10,5) not null,
 date_extrato timestamp not null,
+transaction varchar(255) not null,
 describe_registry varchar(100) not null
 );

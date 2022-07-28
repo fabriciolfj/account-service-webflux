@@ -1,6 +1,7 @@
 package com.github.fabriciolfj.accountservice.interfaceadapter.provider.rate.message.converter;
 
 import com.github.fabriciolfj.accountservice.domain.Account;
+import com.github.fabriciolfj.accountservice.interfaceadapter.provider.rate.message.model.SendRateRequest;
 
 public class MsgRateProviderConverter {
 

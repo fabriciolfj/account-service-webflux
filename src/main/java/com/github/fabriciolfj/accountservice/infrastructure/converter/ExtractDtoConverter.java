@@ -11,6 +11,6 @@ public class ExtractDtoConverter {
     }
 
     public static final Extract toDomainDebit(final ExtractRequest request) {
-        return Extract.newExtract(request.getValue(), request.getCodeConta(), TypeOperation.DEBIT);
+        return Extract.newExtract(request.getValue(), request.getCodeConta(), request.getTransaction(), TypeOperation.DEBIT);
     }
 }

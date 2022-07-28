@@ -25,6 +25,7 @@ public class AccountEntityMapper {
                 .dateRegistration(entity.getDateRegistration())
                 .extracts(List.of(extract))
                 .code(entity.getCode())
+                .withdraw(entity.getWithdraw())
                 .build();
     }
 
