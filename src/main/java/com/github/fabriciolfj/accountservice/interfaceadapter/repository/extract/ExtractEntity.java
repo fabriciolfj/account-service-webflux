@@ -28,4 +28,5 @@ public class ExtractEntity {
     private LocalDateTime dateExtrato;
     @Column("transaction")
     private String transaction;
+    private String status;
 }

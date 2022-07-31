@@ -25,7 +25,7 @@ public class Extract {
     private BigDecimal balance;
     private String describe;
     private LocalDateTime date;
-
+    private StatusTransactions statusTransactions;
     private String transaction;
     public static Extract initial(final BigDecimal balance, final String code) {
         var extract = extractDefault(code);
@@ -35,6 +35,7 @@ public class Extract {
         extract.setCodeConta(code);
         extract.setDescribe(CREDIT + " value:" + balance);
         extract.setTransaction(UUID.randomUUID().toString());
+        extract.setStatusTransactions(StatusTransactions.PENDING);
         return extract;
     }
 
@@ -46,12 +47,14 @@ public class Extract {
                 extract.setDebit(BigDecimal.ZERO);
                 extract.setDescribe(CREDIT + " value:" + value);
                 extract.setTransaction(transaction);
+                extract.setStatusTransactions(StatusTransactions.PENDING);
             }
             case DEBIT -> {
                 extract.setDebit(value);
                 extract.setCredit(BigDecimal.ZERO);
                 extract.setDescribe(DEBIT + " value:" + value);
                 extract.setTransaction(transaction);
+                extract.setStatusTransactions(StatusTransactions.PENDING);
             }
         }
 

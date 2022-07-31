@@ -1,6 +1,7 @@
 package com.github.fabriciolfj.accountservice.interfaceadapter.repository.mapper;
 
 import com.github.fabriciolfj.accountservice.domain.Extract;
+import com.github.fabriciolfj.accountservice.domain.StatusTransactions;
 import com.github.fabriciolfj.accountservice.interfaceadapter.repository.extract.ExtractEntity;
 
 public class ExtractEntityMapper {
@@ -19,6 +20,7 @@ public class ExtractEntityMapper {
                 .debit(entity.getDebit())
                 .describe(entity.getDescribe())
                 .transaction(entity.getTransaction())
+                .statusTransactions(StatusTransactions.toEnum(entity.getStatus()))
                 .build();
     }
 
@@ -31,6 +33,7 @@ public class ExtractEntityMapper {
                 .debit(extract.getDebit())
                 .describe(extract.getDescribe())
                 .transaction(extract.getTransaction())
+                .status(extract.getStatusTransactions().getDescribe())
                 .build();
     }
 }
