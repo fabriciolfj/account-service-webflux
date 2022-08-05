@@ -20,6 +20,10 @@ spring:
   cloud:
     stream:
       bindings:
+        transactionAutorize-in-0:
+          destination: transaction-autorize-group
+          contentType: application/json
+          group: '${spring.application.name}'
         updateWithdraw-in-0:
           destination: update-withdraw-group
           content-type: application/json

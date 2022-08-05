@@ -31,8 +31,9 @@ public class Account {
     private LocalDate dateRegistration;
 
     public boolean isResetRule() {
-        var newDate = dateRegistration.plusDays(29);
-        return newDate.isBefore(LocalDate.now());
+        /*var newDate = dateRegistration.plusDays(29);
+        return newDate.isBefore(LocalDate.now());*/
+        return true;
     }
 
     public Account decrementWithdraw() {

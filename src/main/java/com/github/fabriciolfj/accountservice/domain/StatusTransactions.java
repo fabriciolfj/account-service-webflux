@@ -15,7 +15,7 @@ public enum StatusTransactions {
 
     public static StatusTransactions toEnum(final String describe) {
         return Arrays.stream(StatusTransactions.values())
-                .filter(value -> value.equals(describe))
+                .filter(value -> value.describe.equals(describe))
                 .findFirst()
                 .orElseThrow(() -> new StautsNotFoundException("Status not found: " + describe));
     }

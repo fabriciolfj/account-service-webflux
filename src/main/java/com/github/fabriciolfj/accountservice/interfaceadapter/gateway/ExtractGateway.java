@@ -2,7 +2,9 @@ package com.github.fabriciolfj.accountservice.interfaceadapter.gateway;
 
 import com.github.fabriciolfj.accountservice.business.FindExtract;
 import com.github.fabriciolfj.accountservice.business.SaveExtract;
+import com.github.fabriciolfj.accountservice.business.UpdateTransaction;
 import com.github.fabriciolfj.accountservice.domain.Extract;
+import com.github.fabriciolfj.accountservice.domain.Transaction;
 import com.github.fabriciolfj.accountservice.domain.exceptions.ExtractProcessException;
 import com.github.fabriciolfj.accountservice.interfaceadapter.repository.extract.ExtractEntity;
 import com.github.fabriciolfj.accountservice.interfaceadapter.repository.extract.ExtractRepository;
@@ -16,7 +18,7 @@ import reactor.core.publisher.Mono;
 
 @Component
 @RequiredArgsConstructor
-public class ExtractGateway  implements FindExtract, SaveExtract {
+public class ExtractGateway  implements FindExtract, SaveExtract, UpdateTransaction {
 
     private final ExtractRepository extractRepository;
 
@@ -51,5 +53,10 @@ public class ExtractGateway  implements FindExtract, SaveExtract {
         return Mono.just(extract)
                 .flatMap(e -> extractRepository.save(ExtractEntityMapper.toEntity(e)))
                 .thenReturn(extract);
+    }
+
+    @Override
+    public Mono<Void> processing(final Transaction transaction) {
+        return extractRepository.updateTransaction(transaction.getStatus().getDescribe(), transaction.getId());
     }
 }
