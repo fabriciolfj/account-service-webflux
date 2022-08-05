@@ -18,6 +18,8 @@ spring:
     listener:
       missing-topics-fatal: false
   cloud:
+    function:
+      definition: updateWithdraw;transactionAutorize
     stream:
       bindings:
         transactionAutorize-in-0:
@@ -44,7 +46,7 @@ spring:
       initial-size: 5
       max-size: 10
   application:
-    name: account-service
+    name: webflux
   lifecycle:
     timeout-per-shutdown-phase: 15s
 
