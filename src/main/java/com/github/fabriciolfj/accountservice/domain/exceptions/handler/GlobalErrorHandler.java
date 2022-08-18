@@ -46,7 +46,7 @@ public class GlobalErrorHandler implements ErrorWebExceptionHandler {
         httpStatus = infrastructureException(throwable, errorDetails, httpStatus);
 
         serverWebExchange.getResponse().setStatusCode(httpStatus);
-        serverWebExchange.getResponse().getHeaders().setContentType(MediaType.TEXT_PLAIN);
+        serverWebExchange.getResponse().getHeaders().setContentType(MediaType.APPLICATION_JSON);
         String errorDetailsMessage = errorDetails.getMessage();
         if (Objects.isNull(errorDetailsMessage)) {
             errorDetailsMessage = "";

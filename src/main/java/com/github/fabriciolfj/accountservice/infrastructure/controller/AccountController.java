@@ -3,6 +3,7 @@ package com.github.fabriciolfj.accountservice.infrastructure.controller;
 import com.github.fabriciolfj.accountservice.business.account.AccountCreateCase;
 import com.github.fabriciolfj.accountservice.business.account.CreditCreateCase;
 import com.github.fabriciolfj.accountservice.business.account.OperationDebitCase;
+import com.github.fabriciolfj.accountservice.domain.exceptions.CreateAccountException;
 import com.github.fabriciolfj.accountservice.infrastructure.converter.AccountDtoConverter;
 import com.github.fabriciolfj.accountservice.infrastructure.converter.ExtractDtoConverter;
 import com.github.fabriciolfj.accountservice.infrastructure.dto.request.AccountRequest;
@@ -12,7 +13,6 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 import reactor.core.publisher.Mono;
-
 import javax.validation.Valid;
 
 @RequestMapping("/api/v1/accounts")
@@ -30,7 +30,8 @@ public class AccountController {
         return Mono.just(request)
                 .map(AccountDtoConverter::toDomain)
                 .flatMap(createCase::execute)
-                .map(AccountDtoConverter::toResponse);
+                .map(AccountDtoConverter::toResponse)
+                .switchIfEmpty(Mono.defer(() -> Mono.error(new CreateAccountException("Fail create account"))));
     }
 
     @PutMapping("/credits")
