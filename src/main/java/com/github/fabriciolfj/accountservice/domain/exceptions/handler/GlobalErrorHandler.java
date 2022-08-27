@@ -1,9 +1,12 @@
 package com.github.fabriciolfj.accountservice.domain.exceptions.handler;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.github.fabriciolfj.accountservice.domain.exceptions.DomainException;
 import com.github.fabriciolfj.accountservice.domain.exceptions.OperationException;
 import com.github.fabriciolfj.accountservice.domain.exceptions.handler.dto.Error;
+import lombok.SneakyThrows;
 import lombok.extern.log4j.Log4j2;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.web.reactive.error.ErrorWebExceptionHandler;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.annotation.Order;
@@ -23,11 +26,14 @@ import java.util.Objects;
 @Order(-2)
 @ControllerAdvice
 @Log4j2
-
 public class GlobalErrorHandler implements ErrorWebExceptionHandler {
 
     public static final String UTF_8 = "UTF-8";
 
+    @Autowired
+    private ObjectMapper objectMapper;
+
+    @SneakyThrows
     @Override
     public Mono<Void> handle(ServerWebExchange serverWebExchange, Throwable throwable) {
 
@@ -51,7 +57,11 @@ public class GlobalErrorHandler implements ErrorWebExceptionHandler {
         if (Objects.isNull(errorDetailsMessage)) {
             errorDetailsMessage = "";
         }
-        var dataBuffer = bufferFactory.wrap(errorDetailsMessage.getBytes(Charset.forName(UTF_8)));
+
+        errorDetails.setMessage(errorDetailsMessage);
+
+        var dataBuffer = bufferFactory.wrap(objectMapper.writeValueAsBytes(errorDetails));
+
         return serverWebExchange.getResponse().writeWith(Mono.just(dataBuffer));
     }
 

@@ -35,6 +35,6 @@ public class RateProvider {
                 .timeout(Duration.ofSeconds(2), Mono.empty())
                 .onErrorResume(ProductClientException.class, ex -> Mono.empty())
                 .retryWhen(Retry.backoff(3, Duration.ofMillis(100)))
-                .onErrorResume(ProductClientException.class, ex -> Mono.empty());
+                .onErrorMap(e -> new ProductClientException(e.getMessage()));
     }
 }
