@@ -5,14 +5,10 @@ import com.github.fabriciolfj.accountservice.domain.Account;
 import com.github.fabriciolfj.accountservice.interfaceadapter.provider.rate.http.RateProvider;
 import com.github.fabriciolfj.accountservice.interfaceadapter.provider.rate.http.RateProviderConverter;
 import com.github.fabriciolfj.accountservice.interfaceadapter.provider.rate.http.model.GetRateResponse;
-import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.apache.kafka.common.metrics.stats.Rate;
 import org.redisson.api.RMapCacheReactive;
-import org.redisson.api.RedissonClient;
 import org.redisson.api.RedissonReactiveClient;
 import org.redisson.codec.TypedJsonJacksonCodec;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
 import reactor.core.publisher.Mono;
 
