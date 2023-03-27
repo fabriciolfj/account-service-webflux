@@ -26,6 +26,7 @@ public class AccountGateway implements SaveAccount, FindAccount, ListAllAccounts
 
     private final AccountRepository accountRepository;
     private final ExtractGateway extractGateway;
+
     @Override
     @Transactional(propagation = Propagation.REQUIRED)
     public Mono<Account> save(final Account account) {
@@ -39,6 +40,7 @@ public class AccountGateway implements SaveAccount, FindAccount, ListAllAccounts
                     return Mono.just(account);
                 });
     }
+
     @Override
     @Transactional(propagation = Propagation.NEVER, readOnly = true)
     public Mono<Account> findAccountByCPF(final String cpf) {
