@@ -16,7 +16,7 @@ import java.util.concurrent.TimeUnit;
 
 @Component
 @Slf4j
-public class RateGateway implements GetRate {
+public class  RateGateway implements GetRate {
 
     private RateProvider rateProvider;
 
