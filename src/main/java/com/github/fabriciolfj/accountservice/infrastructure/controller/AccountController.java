@@ -39,7 +39,7 @@ public class AccountController {
     public Mono<Void> createCredit(@Valid @RequestBody final ExtractRequest request) {
         return Mono.just(request)
                 .map(ExtractDtoConverter::toDomainCredit)
-                .flatMap(creditCreateCase::execute)
+                .flatMap(e -> creditCreateCase.execute(Mono.just(e)))
                 .then();
     }
 

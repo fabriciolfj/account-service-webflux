@@ -14,10 +14,11 @@ public class CreditCreateCase {
     private final FindExtract findExtract;
     private final SaveExtract saveExtract;
 
-    public Mono<Extract> execute(final Extract extract) {
-        return Mono.just(extract)
+    public Mono<Extract> execute(final Mono<Extract> extract) {
+        return extract
                 .flatMap(e -> findExtract.findLast(e.getCodeConta()))
-                .map(e -> extract.calculate(e))
+                .zipWith(extract)
+                .map(v -> v.getT2().calculate(v.getT1()))
                 .flatMap(newExtract -> saveExtract.save(newExtract));
     }
 }
